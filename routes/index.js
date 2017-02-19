@@ -5,4 +5,8 @@ router.get('/', function(request, response) {
     response.render('index.html');
 });
 
+router.get('/motion', function(require, response){
+    console.log("motion")
+});
+
 module.exports = router;

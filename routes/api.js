@@ -10,7 +10,9 @@ router.get('/led-blink', function(require, response){
     xhr.open("GET","http://192.168.0.14:3005/blink", true);
     console.log(xhr.readyState);
     xhr.send();
-
-
 });
+
+
+
+
 module.exports = router;

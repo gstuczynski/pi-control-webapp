@@ -1,17 +1,31 @@
-var options = {
-    zone: document.getElementById('zone_joystick'),
-    mode:'semi'
-    };
-var manager = nipplejs.create(options);
 
-var socket = io.connect('/');
+  
+  var joystick  = new VirtualJoystick({
+    container : document.getElementById('zone_joystick'),
+    mouseSupport : true
+  });
 
-manager
-.on('added',  (evt, nipple) => console.log("start"))
-.on('removed', (evt, nipple) => console.log("remove"))
-.on('dir:left', (evt, nipple)=> console.log("left"))
-.on('dir:right', (evt, nipple)=> console.log("right"))
-.on('dir:up', (evt, nipple)=> {
-    socket.emit('forward');
-})
-.on('dir:down', (evt, nipple)=> console.log("down"));
+  function motion() {
+    if( joystick.up() ) {
+      socket.emit('forward');
+      console.log("forward")
+    }
+    if( joystick.down() ) {
+      socket.emit('reverse');
+      console.log("reverse");
+    }
+    if( joystick.right() ) {
+      socket.emit('right');
+      console.log("right");
+    } 
+    if( joystick.left() ) {
+      socket.emit('left');
+      console.log("left");
+    }
+    if( joystick.deltaX() === 0 && joystick.deltaY() === 0 ) {
+      //socket.emit('stop');
+     // console.log("stop")
+    }
+    requestAnimationFrame(motion);
+  }
+  requestAnimationFrame(motion);

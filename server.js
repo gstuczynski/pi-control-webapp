@@ -30,20 +30,33 @@ server.listen(PORT, ()=>{
 });
 
 
- var pi = piSocket.connect('http://192.168.0.14:3013')
-//console.log(pi)
-pi.once("connect",()=>{
-  console.log("c")
-pi.emit('test',{x:'x'},(msg)=>console.log(msg+"msg"))
-})
-   // piSocket.emit('forward',{},(data, err)=> console.log(data+err))
-
 io.on("connection", (socket)=>{
-
-
+ var pi = piSocket.connect('http://192.168.0.14:3333')
+pi.once("connect",()=>{
   console.log("client connected");
-  socket.on("forward",(state)=>{
-  
-    console.log("poszedl x");
+
+  socket
+  .on("forward",(state)=>{
+    pi.emit('forward')
+    console.log("forward");})
+  .on("stop",(state)=>{
+   // console.log("stop");
+   // pi.emit('stop')
   })
+  .on("reverse",(state)=>{
+    console.log("reverse");
+    pi.emit('reverse')})
+  .on("left",()=>{
+    console.log("left");
+    pi.emit('left')})
+  .on("right",()=>{
+    console.log("right");
+    pi.emit('right')})
+  .on("bulbOn",()=>{
+    console.log("bulbOn");
+    pi.emit('bulbOn')})
+  .on("bulbOff",()=>{
+    console.log("bulbOff");
+    pi.emit('bulbOff')})
 });
+})

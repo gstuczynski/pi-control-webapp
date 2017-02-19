@@ -5,16 +5,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles/styles.css">
+
     </head>
     <body>
-    <img id="stream" src="http://192.168.0.14:8081//xxx" alt="device not found" />
+    <!--<img id="stream" src="http://192.168.0.14:8081//xxx" alt="device not found" />-->
     <div id="zone_joystick" >s</div>
-   <button type="button" id="blinkBtn">Blink</button>
+    <button type="button" id="bulbOn">Bulb ON</button>
+    <button type="button" id="bulbOff">Bulb OFF</button>
+
+
 
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-   <script src="scripts/led.js"></script>
-   <script src="scripts/nipplejs.min.js"></script>
-      <script src="scripts/joystick.js"></script>
+<script>  var socket = io.connect('/');</script>
+<script src="bower_components/virtualjoystick.js/virtualjoystick.js"></script>
+<script src="scripts/joystick.js"></script>
+<script src="scripts/bulb.js"></script>
     </body>
 </html>
